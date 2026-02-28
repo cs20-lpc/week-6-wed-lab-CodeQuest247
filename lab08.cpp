@@ -12,6 +12,13 @@ unsigned mult(unsigned, unsigned);
 unsigned power(unsigned, unsigned);
 unsigned product(unsigned, unsigned);
 
+//Added tail-recursive prototypes 
+static unsigned factTR(unsigned, unsigned);
+static unsigned fibTR(unsigned, unsigned, unsigned);
+static unsigned multTR(unsigned, unsigned, unsigned);
+static unsigned powerTR(unsigned, unsigned, unsigned);
+static unsigned productTR(unsigned, unsigned, unsigned);
+
 /*******************************************************************************
  * Description:
  * Starting point of the program. Calls various recursive functions that can be
@@ -46,6 +53,71 @@ int main() {
  * TODO: make them tail recursive :)
 *******************************************************************************/
 
+unsigned fact(unsigned n) {
+    return factTR(n, 1);
+}
+
+unsigned fib(unsigned n) {
+    return fibTR(n, 0, 1);
+}
+
+unsigned mult(unsigned x, unsigned y) {
+    return multTR(x, y, 0);
+}
+
+unsigned power(unsigned x, unsigned y) {
+    return powerTR(x, y, 1);
+}
+
+unsigned product(unsigned x, unsigned y) {
+    return productTR(x, y, 1);
+}
+
+
+
+
+
+static unsigned factTR(unsigned n, unsigned acc) {
+    if (n <= 1) return acc;
+    return factTR(n - 1, acc * n);
+}
+
+static unsigned fibTR(unsigned n, unsigned a, unsigned b) {
+    if (n == 0) return a;
+    return fibTR(n - 1, b, a + b);
+}
+
+static unsigned multTR(unsigned x, unsigned y, unsigned acc) {
+    if (y == 0) return acc;
+    return multTR(x, y - 1, acc + x);
+}
+
+static unsigned powerTR(unsigned x, unsigned y, unsigned acc) {
+    if (y == 0) return acc;
+    return powerTR(x, y - 1, acc * x);
+}
+
+static unsigned productTR(unsigned x, unsigned y, unsigned acc) {
+    if (x > y) return acc;
+    return productTR(x + 1, y, acc * x);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 unsigned fact(unsigned n) {
     // base cases (combined)
     if (n <= 1) {
@@ -104,3 +176,4 @@ unsigned product(unsigned x, unsigned y) {
     unsigned p = product(x + 1, y);
     return p * x;
 }
+*/ 
